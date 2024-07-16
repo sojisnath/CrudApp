@@ -85,38 +85,7 @@ namespace CrudApp.Controllers
         // POST: EmployeeDetails/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("EmpId,EmpCode,EmpName,EmpDesignation,EmpDepartment,EmpMobileNumber,EmpEmailId,EmpSalary,EmpAddress")] EmployeeDetail employeeDetail)
-        //{
-        //    if (id != employeeDetail.EmpId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(employeeDetail);
-        //            await _context.SaveChangesAsync();
-
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!EmployeeDetailExists(employeeDetail.EmpId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(employeeDetail);
-        //}
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
