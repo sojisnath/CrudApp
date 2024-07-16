@@ -82,6 +82,11 @@
             <th>
                 No.
                 </th>
+                <th>
+                EMPLOYEE CODE
+                 <!--@Html.DisplayNameFor(model => model.EmpCode) -->
+                
+            </th>
 
             <th>
                 NAME
@@ -113,6 +118,9 @@
             <td>
                         @(++indexStart)
                   
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.EmpCode)
             </td>
             <td>
                     @Html.DisplayFor(modelItem => item.EmpName)

@@ -59,9 +59,11 @@ namespace CrudApp.Controllers
             {
                 _context.Add(employeeDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true, message = "Saved" });
+                //return RedirectToAction(nameof(Index));
             }
-            return View(employeeDetail);
+            //return View(employeeDetail);
+            return Json(new { success = false, message = "Failed to save the data" });
         }
 
         // GET: EmployeeDetails/Edit/5
@@ -83,13 +85,46 @@ namespace CrudApp.Controllers
         // POST: EmployeeDetails/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("EmpId,EmpCode,EmpName,EmpDesignation,EmpDepartment,EmpMobileNumber,EmpEmailId,EmpSalary,EmpAddress")] EmployeeDetail employeeDetail)
+        //{
+        //    if (id != employeeDetail.EmpId)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(employeeDetail);
+        //            await _context.SaveChangesAsync();
+
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!EmployeeDetailExists(employeeDetail.EmpId))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(employeeDetail);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmpId,EmpCode,EmpName,EmpDesignation,EmpDepartment,EmpMobileNumber,EmpEmailId,EmpSalary,EmpAddress")] EmployeeDetail employeeDetail)
         {
             if (id != employeeDetail.EmpId)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Employee not found" });
             }
 
             if (ModelState.IsValid)
@@ -98,23 +133,24 @@ namespace CrudApp.Controllers
                 {
                     _context.Update(employeeDetail);
                     await _context.SaveChangesAsync();
-                   
+                    return Json(new { success = true, message = "Updated" });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!EmployeeDetailExists(employeeDetail.EmpId))
                     {
-                        return NotFound();
+                        return Json(new { success = false, message = "Employee not found" });
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(employeeDetail);
+            return Json(new { success = false, message = "Model state is not valid" });
         }
+
+
 
         // GET: EmployeeDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
