@@ -19,7 +19,7 @@ namespace CrudApp.Controllers
         }
 
         // GET: EmployeeDetails
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()//change check
         {
             return View(await _context.EmployeeDetails.ToListAsync());
         }
@@ -98,6 +98,7 @@ namespace CrudApp.Controllers
                 {
                     _context.Update(employeeDetail);
                     await _context.SaveChangesAsync();
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
