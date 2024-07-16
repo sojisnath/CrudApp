@@ -1,0 +1,147 @@
+﻿@model CrudApp.Models.EmployeeDetail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+
+   
+
+    p {
+        margin-left: 1100px;
+    }
+
+    h1 {
+        
+        background-color: #f0f0f0;
+        margin-left: 500px;
+    }
+
+    div{
+        justify-content: center;
+        background-color: #f0f0f0;
+    }
+
+    .form-group.row {
+        margin-bottom: 10px; /* Adjust this value to reduce/increase the gap */
+
+    }
+
+    
+    .form-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        
+    }
+
+
+</style>
+
+
+
+
+
+
+
+<h1>Create New Employee</h1>
+
+
+<hr />
+
+
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="Create" id="createForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+                <label asp-for="EmpCode" class="col-sm-3 col-form-label">EMPLOYEE CODE</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpCode" class="form-control" />
+                    <span asp-validation-for="EmpCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpName" class="col-sm-3 col-form-label">NAME</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpName" class="form-control" />
+                    <span asp-validation-for="EmpName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpDesignation" class="col-sm-3 col-form-label">DESIGNATION</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpDesignation" class="form-control" />
+                    <span asp-validation-for="EmpDesignation" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpDepartment" class="col-sm-3 col-form-label">DEPARTMENT</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpDepartment" class="form-control" />
+                    <span asp-validation-for="EmpDepartment" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpMobileNumber" class="col-sm-3 col-form-label">MOBILE NUMBER</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpMobileNumber" class="form-control" />
+                    <span asp-validation-for="EmpMobileNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpEmailId" class="col-sm-3 col-form-label">EMAIL-ID</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpEmailId" class="form-control" />
+                    <span asp-validation-for="EmpEmailId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpSalary" class="col-sm-3 col-form-label">SALARY</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpSalary" class="form-control" />
+                    <span asp-validation-for="EmpSalary" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EmpAddress" class="col-sm-3 col-form-label">ADDRESS</label>
+                <div class="col-sm-9">
+                    <input asp-for="EmpAddress" class="form-control" />
+                    <span asp-validation-for="EmpAddress" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#createForm").submit(function (event) {
+                if (!$(this).valid()) {
+                    event.preventDefault();
+                    alert("All fields are mandatory. Please fill out all fields.");
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<CrudApp.Models.EmployeeDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    int index = 0;
+    int pageSize = 10;
+    int pageCount = (int)Math.Ceiling(Model.Count() / (double)pageSize);
+    var currentPage = Convert.ToInt32(ViewContext.HttpContext.Request.Query["currentPage"].FirstOrDefault() ?? "1");
+    var sortedModel = Model.OrderByDescending(emp => emp.EmpId);
+}
+
+
+<style>
+
+    .table {
+        background-color: #f0f0f0; 
+        border: 1px solid #ccc; 
+        border-collapse: collapse; 
+        width: 100%; 
+    }
+
+    .table th, .table td {
+        padding: 8px; 
+        text-align: left; 
+        border: 1px solid #ddd; 
+    }
+
+    .table th {
+        background-color: #f2f2f2; 
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: inline-flex;
+        padding-left: 0;
+        list-style: none;
+        border-radius: .25rem;
+    }
+
+    .page-item {
+        margin: 0 5px;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .page-item.active .page-link {
+        z-index: 1;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    p{
+        margin-left: 1100px;
+    }
+    h1{
+        background-color: #f0f0f0;
+    }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New Employee</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                No.
+                </th>
+
+            <th>
+                NAME
+                 <!--@Html.DisplayNameFor(model => model.EmpName) -->
+                
+            </th>
+            <th>
+                DESIGNATION
+                <!--@Html.DisplayNameFor(model => model.EmpDesignation)-->
+            </th>
+            <th>
+                DEPARTMENT
+                <!--@Html.DisplayNameFor(model => model.EmpDepartment)-->
+            </th>
+            <th>
+                ACTION
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+
+         @{
+            var indexStart = (currentPage - 1) * pageSize;
+        // @foreach (var item in Model.Skip((currentPage - 1) * pageSize).Take(pageSize))
+            foreach (var item in sortedModel.Skip(indexStart).Take(pageSize))
+        {
+           
+        <tr>
+            <td>
+                        @(++indexStart)
+                  
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpDesignation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpDepartment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmpId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EmpId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmpId">Delete</a>
+            </td>
+        </tr>
+}
+}
+    </tbody>
+</table>
+@* 
+@if (pageCount > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= pageCount; i++)
+            {
+                <li class="page-item @(currentPage == i ? "active" : "")">
+                    <a class="page-link" href="?currentPage=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+} *@
+
+@if (pageCount > 1)
+{
+    <div class="pagination-container">
+        <nav>
+            <ul class="pagination">
+                @for (int i = 1; i <= pageCount; i++)
+                {
+                    <li class="page-item @(currentPage == i ? "active" : "")">
+                        <a class="page-link" href="?currentPage=@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
